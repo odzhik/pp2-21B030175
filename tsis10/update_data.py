@@ -1,33 +1,40 @@
-import psycopg2
-from config import host, user, password, db_name
+import psycopg2 as pgsql
 
-sql_update_name = '''
-    UPDATE phone_book SET user_name = %s WHERE phone_id = %s;
-'''
 
-sql_update_phone = '''
-    UPDATE phone_book SET phone_number = %s WHERE phone_id = %s;
-'''
+connection=pgsql.connect(host="localhost", dbname="postgres", user="postgres",
+                         password="12345", port=5432)
+cur=connection.cursor()
 
-db = psycopg2.connect(
-    host=host,
-    user=user,
-    password=password,
-    database=db_name
-)
-cursor = db.cursor()
+cur.execute("""CREATE TABLE IF NOT EXISTS PhoneBook (
+    surname VARCHAR(255),
+    name VARCHAR(255),
+    number INT 
+);
+""")
+def update(sn, mode, newv):
+    cur.execute("""UPDATE PhoneBook
+    SET {} = '{}'
+    WHERE surname = '{}'
+    """.format(mode,newv,sn))
 
-command = input("What do you want to update?[phone/name]\n")
-id = input("Please enter the id of the phone record to update:")
-if command == 'phone':
-    phone = input("Input new value of phone number:")
-    cursor.execute(sql_update_phone, (phone, id))
-elif command == 'name':
-    name = input("Input new value of user name:")
-    cursor.execute(sql_update_name, (name, id))
-else:
-    print("There is no such command")
-
-cursor.close()
-db.commit()
-db.close()
+def delete(sn):
+    cur.execute("""DELETE FROM Phonebook
+    WHERE surname='{}'
+    """.format(sn))
+while True:
+    print("Type 'update' to update some data or 'stop' to break")
+    mode=input()
+    if mode=="stop":
+        break
+    cur.execute("""SELECT * FROM PhoneBook""")
+    print(cur.fetchall())
+    print("Enter surname")
+    idtochange=input()
+    print("What you want to change? name/number")
+    mode=input()
+    print("Enter new name/number")
+    newvalue=input()
+    update(idtochange, mode, newvalue)
+connection.commit()
+cur.close()
+connection.close()
