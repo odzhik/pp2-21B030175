@@ -6,7 +6,7 @@ import time
 from pygame.math import Vector2 as vt
 
 connection = pgsql.connect(host="localhost", dbname="postgres", user="postgres",
-                           password="baha2710", port=5432)
+                           password="12345", port=5432)
 cur = connection.cursor()
 
 cur.execute("""CREATE TABLE IF NOT EXISTS snakegame (
@@ -25,13 +25,13 @@ pg.init()
 screen = pg.display.set_mode((cell_s * 20, cell_s * 20))
 pg.display.set_caption("shashlyk snake")
 clock = pg.time.Clock()
-shashlyk = pg.image.load("/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/shashlyk.png").convert_alpha()
-qazy = pg.image.load("/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/qazy.png").convert_alpha()
-bg = pg.image.load("/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/bg.png").convert_alpha()
-bgdead = pg.image.load("/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/bgdead.png").convert_alpha()
-icon = pg.image.load("/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/icon.png").convert_alpha()
+shashlyk = pg.image.load("/Users/Olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/shashlyk.png").convert_alpha()
+qazy = pg.image.load("/Users/Olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/qazy.png").convert_alpha()
+bg = pg.image.load("/Users/Olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/bg.png").convert_alpha()
+bgdead = pg.image.load("/Users/Olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/bgdead.png").convert_alpha()
+icon = pg.image.load("/Users/Olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/icon.png").convert_alpha()
 pg.display.set_icon(icon)
-game_font = pg.font.Font('/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/Minecraft.ttf', 25)
+game_font = pg.font.Font('/Users/Olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/Minecraft.ttf', 25)
 
 qazymode = 1
 welcomescreen = True
@@ -69,36 +69,36 @@ class SNAKE:
         self.dirc = vt(1, 0)
         self.add_block = False
         self.head_up = pg.image.load(
-            '/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/head_up.png').convert_alpha()
+            '/Users/olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/head_up.png').convert_alpha()
         self.head_down = pg.image.load(
-            '/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/head_down.png').convert_alpha()
+            '/Users/olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/head_down.png').convert_alpha()
         self.head_right = pg.image.load(
-            '/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/head_right.png').convert_alpha()
+            '/Users/olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/head_right.png').convert_alpha()
         self.head_left = pg.image.load(
-            '/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/head_left.png').convert_alpha()
+            '/Users/olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/head_left.png').convert_alpha()
 
         self.tail_up = pg.image.load(
-            '/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/tail_up.png').convert_alpha()
+            '/Users/olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/tail_up.png').convert_alpha()
         self.tail_down = pg.image.load(
-            '/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/tail_down.png').convert_alpha()
+            '/Users/olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/tail_down.png').convert_alpha()
         self.tail_right = pg.image.load(
-            '/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/tail_right.png').convert_alpha()
+            '/Users/olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/tail_right.png').convert_alpha()
         self.tail_left = pg.image.load(
-            '/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/tail_left.png').convert_alpha()
+            '/Users/olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/tail_left.png').convert_alpha()
 
         self.body_vertical = pg.image.load(
-            '/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/body_vertical.png').convert_alpha()
+            '/Users/olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/body_vertical.png').convert_alpha()
         self.body_horizontal = pg.image.load(
-            '/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/body_horizontal.png').convert_alpha()
+            '/Users/olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/body_horizontal.png').convert_alpha()
 
         self.body_tr = pg.image.load(
-            '/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/body_tr.png').convert_alpha()
+            '/Users/olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/body_tr.png').convert_alpha()
         self.body_tl = pg.image.load(
-            '/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/body_tl.png').convert_alpha()
+            '/Users/olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/body_tl.png').convert_alpha()
         self.body_br = pg.image.load(
-            '/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/body_br.png').convert_alpha()
+            '/Users/olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/body_br.png').convert_alpha()
         self.body_bl = pg.image.load(
-            '/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/body_bl.png').convert_alpha()
+            '/Users/olzhas/Coding/pp2-22B030598/tsis10/snake 2.0/body_bl.png').convert_alpha()
         self.crunch_sound = pg.mixer.Sound('/Users/bahauddin/Coding/pp2-22B030598/tsis10/snake 2.0/se_fruit.mp3')
 
     def draw_s(self):
